@@ -1,5 +1,5 @@
 import { Volume2, Music, CircleHelp } from "lucide-react";
-import { controlPanelButton } from "../utils/common/button";
+import { controlPanelButton } from "../utils/common/buttons";
 
 export default function ControlPanel() {
   return (

@@ -2,10 +2,13 @@ import clsx from "clsx";
 import backgroundVideo from "../assets/videos/bakcground_video.mp4";
 import Header from "../components/Header";
 import ControlPanel from "../components/ControlPanel";
-import { buttonBase, buttonVariants } from "../utils/common/button";
+import { buttonBase, buttonVariants } from "../utils/common/buttons";
 
 function StartButtonChoices() {
-  const primary_btn_outline = clsx(buttonBase, buttonVariants["primaryOutline"]);
+  const primary_btn_outline = clsx(
+    buttonBase,
+    buttonVariants["primaryOutline"]
+  );
 
   return (
     <div className="flex flex-col gap-[var(--size-32px)]">
