@@ -88,5 +88,6 @@
 
   /* Design Tokens */
   --text-primary: var(--base-black);
+  --text-secondary: var(--base-white);
   --bg-primary: var(--base-white);
 }
