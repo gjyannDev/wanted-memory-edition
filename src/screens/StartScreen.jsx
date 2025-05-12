@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import backgroundVideo from "../assets/videos/bakcground_video.mp4";
 import Header from "../components/Header";
+import ControlPanel from "../components/ControlPanel";
 import { buttonBase, buttonVariants } from "../utils/common/button";
 
 function StartButtonChoices() {
@@ -26,7 +27,7 @@ function StartButtonChoices() {
 
 export default function StartScreen() {
   return (
-    <div className="flex h-screen justify-center">
+    <div className="flex flex-col h-screen justify-baseline">
       <video
         className="fixed top-0 left-0 w-full h-full object-cover -z-10"
         src={backgroundVideo}
@@ -35,10 +36,11 @@ export default function StartScreen() {
         muted
         playsInline
       ></video>
-      <div className="flex flex-col gap-[var(--size-80px)] items-center">
+      <div className="flex flex-col gap-[var(--size-80px)] items-center h-[560px]">
         <Header />
         <StartButtonChoices />
       </div>
+      <ControlPanel />
     </div>
   );
 }
