@@ -1,10 +1,10 @@
 import clsx from "clsx";
 import backgroundVideo from "../assets/videos/bakcground_video.mp4";
-import Header from "../components/Header";
 import ControlPanel from "../components/ControlPanel";
+import Header from "../components/Header";
 import { buttonBase, buttonVariants } from "../utils/common/buttons";
 
-function StartButtonChoices() {
+function StartButtonChoices({ setIsGameStarted }) {
   const primary_btn_outline = clsx(
     buttonBase,
     buttonVariants["primaryOutline"]
@@ -15,20 +15,20 @@ function StartButtonChoices() {
       <button
         className={primary_btn_outline}
         type="button"
+        onClick={() => {
+          setIsGameStarted(true);
+        }}
       >
         Start Game
       </button>
-      <button
-        className={primary_btn_outline}
-        type="button"
-      >
+      <button className={primary_btn_outline} type="button">
         Match Log
       </button>
     </div>
   );
 }
 
-export default function StartScreen() {
+export default function StartScreen({ setIsGameStarted }) {
   return (
     <div className="flex flex-col h-screen justify-baseline">
       <video
@@ -41,7 +41,7 @@ export default function StartScreen() {
       ></video>
       <div className="flex flex-col gap-[var(--size-80px)] items-center h-[560px]">
         <Header />
-        <StartButtonChoices />
+        <StartButtonChoices setIsGameStarted={setIsGameStarted} />
       </div>
       <ControlPanel />
     </div>
