@@ -4,6 +4,27 @@ import ControlPanel from "../components/ControlPanel";
 import Header from "../components/Header";
 import { buttonBase, buttonVariants } from "../utils/common/buttons";
 
+function DifficultyChoicesButton() {
+  const primary_btn_outline = clsx(
+    buttonBase,
+    buttonVariants["primaryOutline"]
+  );
+
+  return (
+    <div className="flex flex-col gap-[var(--size-32px)]">
+      <button className={primary_btn_outline} type="button">
+        Easy
+      </button>
+      <button className={primary_btn_outline} type="button">
+        Medium
+      </button>
+      <button className={primary_btn_outline} type="button">
+        Hard
+      </button>
+    </div>
+  );
+}
+
 function StartButtonChoices({ setIsGameStarted }) {
   const primary_btn_outline = clsx(
     buttonBase,
@@ -28,7 +49,7 @@ function StartButtonChoices({ setIsGameStarted }) {
   );
 }
 
-export default function StartScreen({ setIsGameStarted }) {
+export default function StartScreen({ isGameStarted, setIsGameStarted }) {
   return (
     <div className="flex flex-col h-screen justify-baseline">
       <video
@@ -41,7 +62,11 @@ export default function StartScreen({ setIsGameStarted }) {
       ></video>
       <div className="flex flex-col gap-[var(--size-80px)] items-center h-[560px]">
         <Header />
-        <StartButtonChoices setIsGameStarted={setIsGameStarted} />
+        {isGameStarted ? (
+          <DifficultyChoicesButton />
+        ) : (
+          <StartButtonChoices setIsGameStarted={setIsGameStarted} />
+        )}
       </div>
       <ControlPanel />
     </div>
