@@ -1,4 +1,5 @@
 import { useState } from "react";
+import GameStartScreen from "./screens/GameStartScreen";
 import StartScreen from "./screens/StartScreen";
 
 export default function App() {
@@ -6,10 +7,11 @@ export default function App() {
 
   return (
     <div className="">
-      <StartScreen
-        isGameStarted={isGameStarted}
-        setIsGameStarted={setIsGameStarted}
-      />
+      {isGameStarted ? (
+        <GameStartScreen />
+      ) : (
+        <StartScreen setIsGameStarted={setIsGameStarted} />
+      )}
     </div>
   );
 }
