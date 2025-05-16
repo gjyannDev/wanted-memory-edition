@@ -2,6 +2,7 @@ import clsx from "clsx";
 import { useState } from "react";
 import onePieceLogo from "../assets/images/one_piece_logo.png";
 import { scoreBoardText } from "../utils/common/utils";
+import WantedCard from "../components/WantedCard";
 
 function GameHeader({ currentScore, bestScore }) {
   const score_text_style = clsx(scoreBoardText);
@@ -30,6 +31,7 @@ export default function Game({ mode }) {
   return (
     <div className="">
       <GameHeader currentScore={score} bestScore={bestScore} />
+      <WantedCard />
     </div>
   );
 }

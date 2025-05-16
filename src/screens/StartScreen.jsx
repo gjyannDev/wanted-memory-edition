@@ -13,7 +13,7 @@ function DifficultyChoicesButton({ setSelectedMode, setScreenStatus }) {
   );
 
   function handleClick(e, status) {
-    const { mode } = e.target.textContent;
+    const mode = e.target.textContent;
 
     setSelectedMode(mode);
     setScreenStatus(status);
