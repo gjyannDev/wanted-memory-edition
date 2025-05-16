@@ -87,7 +87,14 @@
   --base-black: #2a363b;
 
   /* Design Tokens */
+
+  /* text design tokens */
   --text-primary: var(--base-black);
   --text-secondary: var(--base-white);
+  --wanted-text-clr: #473831;
+
+  /* background design tokens */
   --bg-primary: var(--base-white);
+  --card-bg: #d4baa1;
+  --outline-img: #473831;
 }
