@@ -1,8 +1,10 @@
 import clsx from "clsx";
 import { useState } from "react";
 import onePieceLogo from "../assets/images/one_piece_logo.png";
-import { scoreBoardText } from "../utils/common/utils";
 import WantedCard from "../components/WantedCard";
+import FetchData from "../services/FetchData";
+import { scoreBoardText } from "../utils/common/utils";
+import { filteredCharacters } from "../utils/utility";
 
 function GameHeader({ currentScore, bestScore }) {
   const score_text_style = clsx(scoreBoardText);
@@ -27,11 +29,32 @@ function GameHeader({ currentScore, bestScore }) {
 export default function Game({ mode }) {
   const [score, setScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
+  const { fetchCharacterDetails } = FetchData();
+  const selected_characters = [
+    "Monkey D., Luffy",
+    "Sanji",
+    "Jinbe",
+    "Brook",
+    "Usopp",
+    "Nami",
+    "Roronoa, Zoro",
+    "Franky",
+    "Vegapunk",
+    "Nico, Robin",
+    "Tony Tony, Chopper",
+    "Shanks",
+    "Shirahoshi",
+    "Nefertari Vivi",
+    "Portgas D,. Ace",
+    "Sabo",
+    "Boa Hancock",
+  ];
+  const filterd_data = filteredCharacters(fetchCharacterDetails, selected_characters);
 
   return (
     <div className="">
       <GameHeader currentScore={score} bestScore={bestScore} />
-      <WantedCard />
+      <WantedCard characterData={filterd_data}/>
     </div>
   );
 }
