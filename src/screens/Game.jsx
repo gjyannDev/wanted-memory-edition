@@ -3,13 +3,8 @@ import _ from "lodash";
 import { useEffect, useMemo, useState } from "react";
 import onePieceLogo from "../assets/images/one_piece_logo.png";
 import WantedCard from "../components/WantedCard";
-import FetchData from "../services/FetchData";
+import { useGameEngine } from "../customHooks/useGameEngine";
 import { scoreBoardText } from "../utils/common/utils";
-import {
-  filteredCharacters,
-  getRandomIntBasedOnDifficulty,
-  selected_characters,
-} from "../utils/utility";
 
 function GameHeader({ currentScore, bestScore }) {
   const score_text_style = clsx(scoreBoardText);
@@ -33,22 +28,8 @@ function GameHeader({ currentScore, bestScore }) {
 
 //TODO: Separate the logic of the game to a new cutstom hook to make it more resuable and manageable
 export default function Game({ mode }) {
-  const [score, setScore] = useState(0);
-  const [bestScore, setBestScore] = useState(0);
-  const { fetchCharacterDetails } = FetchData();
-  const [filteredData, setFilteredData] = useState([]);
-  const character_data = useMemo(
-    () => filteredCharacters(fetchCharacterDetails, selected_characters),
-    [fetchCharacterDetails]
-  );
-
-  useEffect(() => {
-    const shuffled_data = _.shuffle(character_data);
-
-    if (mode === "Easy") {
-      setFilteredData(shuffled_data.slice(0, 3));
-    }
-  }, [character_data, mode]);
+  const { score, setScore, setBestScore, bestScore, filteredData } =
+    useGameEngine(mode);
 
   return (
     <div className="">

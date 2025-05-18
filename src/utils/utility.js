@@ -8,10 +8,6 @@ export function filteredCharacters(charactersData, selectedCharacters) {
     .map((data) => data.character);
 }
 
-export function getRandomIntBasedOnDifficulty(num) {
-  return Math.floor(Math.random() * num);
-}
-
 export const selected_characters = [
   "Monkey D., Luffy",
   "Sanji",
