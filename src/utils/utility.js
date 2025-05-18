@@ -1,4 +1,4 @@
-import FetchData from "../services/FetchData";
+import _ from "lodash";
 
 export function filteredCharacters(charactersData, selectedCharacters) {
   if (!charactersData || !Array.isArray(charactersData)) return [];
@@ -6,6 +6,17 @@ export function filteredCharacters(charactersData, selectedCharacters) {
   return charactersData
     .filter((data) => selectedCharacters.includes(data.character.name))
     .map((data) => data.character);
+}
+
+export function shuffleCharacterData(character_data, mode) {
+  const shuffled_data = _.shuffle(character_data);
+  let result = [];
+
+  if (mode === "Easy") {
+    result = shuffled_data.slice(0, 3);
+  }
+
+  return result
 }
 
 export const selected_characters = [
