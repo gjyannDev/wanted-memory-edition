@@ -1,11 +1,27 @@
-export default function WantedCard({ characterData }) {
+import { shuffleCharacterData } from "../utils/utility";
+
+export default function WantedCard({
+  characterData,
+  gameRounds,
+  setCardClickCount,
+  cardClickCount,
+  setFilteredData,
+  mode,
+  shuffledData,
+}) {
+  function handleCardClick() {
+    setCardClickCount(cardClickCount + 1);
+    setFilteredData(shuffleCharacterData(shuffledData, mode));
+  }
+
   return (
-    <div className="flex flex-col justify-center items-center h-full border border-red-500">
+    <div className="flex flex-col gap-9 justify-center items-center h-full">
       <div className="flex gap-10">
         {characterData.map((data, index) => (
           <div
             key={index}
             className="w-[11.25rem] h-[16.25rem] bg-[var(--card-bg)] flex flex-col items-center gap-3 pt-2 pb-2"
+            onClick={handleCardClick}
           >
             <div className="flex flex-col gap-1.5">
               <p className="text-2xl text-center font-merriweather-bold text-[var(--wanted-text-clr)]">
@@ -28,6 +44,9 @@ export default function WantedCard({ characterData }) {
           </div>
         ))}
       </div>
+      <p className="font-merriweather-bold text-[var(--text-secondary)] text-3xl">
+        {`${cardClickCount} / ${gameRounds}`}
+      </p>
     </div>
   );
 }

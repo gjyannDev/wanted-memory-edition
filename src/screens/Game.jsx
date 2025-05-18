@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import _ from "lodash";
-import { useEffect, useMemo, useState } from "react";
+// import { useEffect, useMemo, useState } from "react";
 import onePieceLogo from "../assets/images/one_piece_logo.png";
 import WantedCard from "../components/WantedCard";
 import { useGameEngine } from "../customHooks/useGameEngine";
@@ -28,13 +28,31 @@ function GameHeader({ currentScore, bestScore }) {
 
 //TODO: Separate the logic of the game to a new cutstom hook to make it more resuable and manageable
 export default function Game({ mode }) {
-  const { score, setScore, setBestScore, bestScore, filteredData } =
-    useGameEngine(mode);
+  const {
+    score,
+    setScore,
+    setBestScore,
+    bestScore,
+    filteredData,
+    gameRounds,
+    cardClickCount,
+    setCardClickCount,
+    setFilteredData,
+    character_data,
+  } = useGameEngine(mode);
 
   return (
     <div className="">
       <GameHeader currentScore={score} bestScore={bestScore} />
-      <WantedCard characterData={filteredData} />
+      <WantedCard
+        characterData={filteredData}
+        gameRounds={gameRounds}
+        setCardClickCount={setCardClickCount}
+        cardClickCount={cardClickCount}
+        setFilteredData={setFilteredData}
+        mode={mode}
+        shuffledData={character_data}
+      />
     </div>
   );
 }
