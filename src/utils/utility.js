@@ -14,9 +14,13 @@ export function shuffleCharacterData(character_data, mode) {
 
   if (mode === "Easy") {
     result = shuffled_data.slice(0, 3);
+  } else if (mode === "Medium") {
+    result = shuffled_data.slice(0, 5);
+  } else if (mode === "Hard") {
+    result = shuffled_data.slice(0, 6);
   }
 
-  return result
+  return result;
 }
 
 export const selected_characters = [

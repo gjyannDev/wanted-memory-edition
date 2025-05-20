@@ -23,6 +23,12 @@ export function useGameEngine(mode) {
     if (mode === "Easy") {
       setFilteredData(shuffleCharacterData(character_data, mode));
       setGameRounds(5);
+    } else if (mode === "Medium") {
+      setFilteredData(shuffleCharacterData(character_data, mode));
+      setGameRounds(8);
+    } else if ( mode === "Hard" ) {
+      setFilteredData(shuffleCharacterData(character_data, mode));
+      setGameRounds(12);
     }
   }, [character_data, mode]);
 
