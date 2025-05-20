@@ -16,7 +16,7 @@ export default function WantedCard({
 
   return (
     <div className="flex flex-col gap-9 justify-center items-center h-full">
-      <div className="flex gap-10">
+      <div className={`flex ${mode === "Hard" ? "gap-5" : "gap-10"}`}>
         {characterData.map((data, index) => (
           <div
             key={index}
