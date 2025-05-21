@@ -5,6 +5,7 @@ import onePieceLogo from "../assets/images/one_piece_logo.png";
 import WantedCard from "../components/WantedCard";
 import { useGameEngine } from "../customHooks/useGameEngine";
 import { scoreBoardText } from "../utils/common/utils";
+import GameResultScreen from "./GameResultScreen";
 
 function GameHeader({ currentScore, bestScore }) {
   const score_text_style = clsx(scoreBoardText);
@@ -26,7 +27,6 @@ function GameHeader({ currentScore, bestScore }) {
   );
 }
 
-//TODO: Separate the logic of the game to a new cutstom hook to make it more resuable and manageable
 export default function Game({ mode }) {
   const {
     score,
@@ -39,6 +39,10 @@ export default function Game({ mode }) {
     setCardClickCount,
     setFilteredData,
     character_data,
+    cardClicks,
+    setCardClicks,
+    isGameOver,
+    setIsGameOver,
   } = useGameEngine(mode);
 
   return (
@@ -52,7 +56,14 @@ export default function Game({ mode }) {
         setFilteredData={setFilteredData}
         mode={mode}
         shuffledData={character_data}
+        cardClicks={cardClicks}
+        setCardClicks={setCardClicks}
+        score={score}
+        setScore={setScore}
+        setIsGameOver={setIsGameOver}
       />
+      {/* {//TODO: put the game over screen in here (Add state that track if the game is over)} AND Also add the winner screen in here*/}
+      {isGameOver && <GameResultScreen result={"Lose"} />}
     </div>
   );
 }

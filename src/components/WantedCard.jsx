@@ -8,20 +8,40 @@ export default function WantedCard({
   setFilteredData,
   mode,
   shuffledData,
+  cardClicks,
+  setCardClicks,
+  score,
+  setScore,
+  setIsGameOver,
 }) {
-  function handleCardClick() {
+  function handleCardClick(e) {
+    const card_id = e.currentTarget.getAttribute("id");
+
     setCardClickCount(cardClickCount + 1);
     setFilteredData(shuffleCharacterData(shuffledData, mode));
+
+    if (cardClicks.includes(card_id)) {
+      //TODO: if game over save the player data in database
+      //TODO: Add here the game over screen
+      setIsGameOver(true);
+    } else {
+      alert("Not Game over");
+      //Append the card id on the card clicks
+      setCardClicks([...cardClicks, card_id]);
+      //Set the score if the card clicked is still not on the card clicks array
+      setScore(score + 1);
+    }
   }
 
   return (
     <div className="flex flex-col gap-9 justify-center items-center h-full">
       <div className={`flex ${mode === "Hard" ? "gap-5" : "gap-10"}`}>
-        {characterData.map((data, index) => (
+        {characterData.map((data) => (
           <div
-            key={index}
+            key={data.mal_id}
             className="w-[11.25rem] h-[16.25rem] bg-[var(--card-bg)] flex flex-col items-center gap-3 pt-2 pb-2"
             onClick={handleCardClick}
+            id={data.mal_id}
           >
             <div className="flex flex-col gap-1.5">
               <p className="text-2xl text-center font-merriweather-bold text-[var(--wanted-text-clr)]">

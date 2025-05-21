@@ -1,5 +1,6 @@
 import _ from "lodash";
 import { useEffect, useMemo, useState } from "react";
+import GameResultScreen from "../screens/GameResultScreen";
 import FetchData from "../services/FetchData";
 import {
   filteredCharacters,
@@ -14,6 +15,8 @@ export function useGameEngine(mode) {
   const [filteredData, setFilteredData] = useState([]);
   const [gameRounds, setGameRounds] = useState(0);
   const [cardClickCount, setCardClickCount] = useState(0);
+  const [cardClicks, setCardClicks] = useState([]);
+  const [isGameOver, setIsGameOver] = useState(false);
   const character_data = useMemo(
     () => filteredCharacters(fetchCharacterDetails, selected_characters),
     [fetchCharacterDetails]
@@ -26,7 +29,7 @@ export function useGameEngine(mode) {
     } else if (mode === "Medium") {
       setFilteredData(shuffleCharacterData(character_data, mode));
       setGameRounds(8);
-    } else if ( mode === "Hard" ) {
+    } else if (mode === "Hard") {
       setFilteredData(shuffleCharacterData(character_data, mode));
       setGameRounds(12);
     }
@@ -43,5 +46,9 @@ export function useGameEngine(mode) {
     cardClickCount,
     setCardClickCount,
     character_data,
+    cardClicks,
+    setCardClicks,
+    isGameOver,
+    setIsGameOver,
   };
 }
