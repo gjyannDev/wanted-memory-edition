@@ -41,8 +41,8 @@ export default function Game({ mode }) {
     character_data,
     cardClicks,
     setCardClicks,
-    isGameOver,
-    setIsGameOver,
+    gameStatus,
+    setGameStatus,
   } = useGameEngine(mode);
 
   return (
@@ -60,10 +60,15 @@ export default function Game({ mode }) {
         setCardClicks={setCardClicks}
         score={score}
         setScore={setScore}
-        setIsGameOver={setIsGameOver}
+        gameStatus={gameStatus}
+        setGameStatus={setGameStatus}
       />
       {/* {//TODO: put the game over screen in here (Add state that track if the game is over)} AND Also add the winner screen in here*/}
-      {isGameOver && <GameResultScreen result={"Lose"} />}
+      {gameStatus === "lose" ? (
+        <GameResultScreen result="Lose" />
+      ) : gameStatus === "win" ? (
+        <GameResultScreen result="Win" />
+      ) : null}
     </div>
   );
 }

@@ -12,24 +12,27 @@ export default function WantedCard({
   setCardClicks,
   score,
   setScore,
-  setIsGameOver,
+  gameStatus,
+  setGameStatus,
 }) {
   function handleCardClick(e) {
-    const card_id = e.currentTarget.getAttribute("id");
+    if (gameStatus !== "playing") return;
 
-    setCardClickCount(cardClickCount + 1);
+    const card_id = e.currentTarget.getAttribute("id");
+    const isAlreadyClicked = cardClicks.includes(card_id);
+
+    if (isAlreadyClicked) {
+      setGameStatus("lose");
+      return;
+    }
+
+    setCardClicks((prev) => [...prev, card_id]);
+    setScore((prev) => prev + 1);
+    setCardClickCount((prev) => prev + 1);
     setFilteredData(shuffleCharacterData(shuffledData, mode));
 
-    if (cardClicks.includes(card_id)) {
-      //TODO: if game over save the player data in database
-      //TODO: Add here the game over screen
-      setIsGameOver(true);
-    } else {
-      alert("Not Game over");
-      //Append the card id on the card clicks
-      setCardClicks([...cardClicks, card_id]);
-      //Set the score if the card clicked is still not on the card clicks array
-      setScore(score + 1);
+    if (score + 1 === gameRounds) {
+      setGameStatus("win");
     }
   }
 

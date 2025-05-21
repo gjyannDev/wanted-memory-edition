@@ -16,7 +16,7 @@ export function useGameEngine(mode) {
   const [gameRounds, setGameRounds] = useState(0);
   const [cardClickCount, setCardClickCount] = useState(0);
   const [cardClicks, setCardClicks] = useState([]);
-  const [isGameOver, setIsGameOver] = useState(false);
+  const [gameStatus, setGameStatus] = useState("playing");
   const character_data = useMemo(
     () => filteredCharacters(fetchCharacterDetails, selected_characters),
     [fetchCharacterDetails]
@@ -48,7 +48,7 @@ export function useGameEngine(mode) {
     character_data,
     cardClicks,
     setCardClicks,
-    isGameOver,
-    setIsGameOver,
+    gameStatus,
+    setGameStatus,
   };
 }
