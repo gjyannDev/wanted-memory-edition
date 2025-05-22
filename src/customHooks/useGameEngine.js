@@ -34,6 +34,14 @@ export function useGameEngine(mode) {
     }
   }, [character_data, mode]);
 
+  function restartGame() {
+    setScore(0);
+    setCardClicks([])
+    setCardClickCount(0);
+    setGameStatus("playing")
+    setFilteredData(shuffleCharacterData(character_data, mode));
+  }
+
   return {
     score,
     setScore,
@@ -49,5 +57,6 @@ export function useGameEngine(mode) {
     setCardClicks,
     gameStatus,
     setGameStatus,
+    restartGame
   };
 }

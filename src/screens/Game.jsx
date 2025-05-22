@@ -27,7 +27,7 @@ function GameHeader({ currentScore, bestScore }) {
   );
 }
 
-export default function Game({ mode }) {
+export default function Game({ mode, playerName}) {
   const {
     score,
     setScore,
@@ -43,6 +43,7 @@ export default function Game({ mode }) {
     setCardClicks,
     gameStatus,
     setGameStatus,
+    restartGame,
   } = useGameEngine(mode);
 
   return (
@@ -62,6 +63,8 @@ export default function Game({ mode }) {
         setScore={setScore}
         gameStatus={gameStatus}
         setGameStatus={setGameStatus}
+        playerName={playerName}
+        restartGame={restartGame}
       />
       {gameStatus === "lose" ? (
         <GameResultScreen result="Lose" />

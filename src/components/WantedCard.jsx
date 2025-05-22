@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { addPlayerData } from "../services/apiService";
 import { shuffleCharacterData } from "../utils/utility";
 
 export default function WantedCard({
@@ -14,15 +16,38 @@ export default function WantedCard({
   setScore,
   gameStatus,
   setGameStatus,
+  playerName,
+  restartGame,
 }) {
+  useEffect(() => {
+    function handleKeyDown(e) {
+      if (
+        (gameStatus === "win" || gameStatus === "lose") &&
+        (e.key === "r" || e.key === "R")
+      ) {
+        restartGame();
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [gameStatus, restartGame]);
+
   function handleCardClick(e) {
     if (gameStatus !== "playing") return;
 
     const card_id = e.currentTarget.getAttribute("id");
     const isAlreadyClicked = cardClicks.includes(card_id);
 
+    const params = {
+      name: playerName,
+      score: score,
+      mode: mode,
+    };
+
     if (isAlreadyClicked) {
       setGameStatus("lose");
+      addPlayerData(params);
       return;
     }
 
@@ -31,8 +56,9 @@ export default function WantedCard({
     setCardClickCount((prev) => prev + 1);
     setFilteredData(shuffleCharacterData(shuffledData, mode));
 
-    if (score + 1 === gameRounds) {
+    if (score === gameRounds) {
       setGameStatus("win");
+      addPlayerData(params);
     }
   }
 
