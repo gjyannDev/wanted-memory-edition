@@ -63,7 +63,6 @@ export default function Game({ mode }) {
         gameStatus={gameStatus}
         setGameStatus={setGameStatus}
       />
-      {/* {//TODO: put the game over screen in here (Add state that track if the game is over)} AND Also add the winner screen in here*/}
       {gameStatus === "lose" ? (
         <GameResultScreen result="Lose" />
       ) : gameStatus === "win" ? (

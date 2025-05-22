@@ -5,6 +5,7 @@ import ControlPanel from "../components/ControlPanel";
 import Header from "../components/Header";
 import { buttonBase, buttonVariants } from "../utils/common/buttons";
 import Game from "./Game";
+import ModalAskName from "./ModalAskName";
 
 function DifficultyChoicesButton({ setSelectedMode, setScreenStatus }) {
   const primary_btn_outline = clsx(
@@ -71,6 +72,15 @@ function StartButtonChoices({ setScreenStatus }) {
 export default function StartScreen() {
   const [selectedMode, setSelectedMode] = useState(null);
   const [screenStatus, setScreenStatus] = useState("start");
+  const [playerName, setPlayerName] = useState("");
+  const [nameInput, setNameInput] = useState("");
+
+  function handleNameSubmit(e) {
+    e.preventDefault();
+    if (nameInput.trim()) {
+      setPlayerName(nameInput.trim());
+    }
+  }
 
   return (
     <div className="flex flex-col h-screen justify-baseline">
@@ -89,7 +99,15 @@ export default function StartScreen() {
             <StartButtonChoices setScreenStatus={setScreenStatus} />
           </>
         ) : screenStatus === "game_started" ? (
-          <Game mode={selectedMode} />
+          <Game mode={selectedMode} playerName={playerName} />
+        ) : playerName === "" ? (
+          <form
+            onSubmit={handleNameSubmit}
+            className="flex flex-col items-center gap-4"
+          >
+            <Header />
+            <ModalAskName setNameInput={setNameInput} value={nameInput} />
+          </form>
         ) : (
           <>
             <Header />

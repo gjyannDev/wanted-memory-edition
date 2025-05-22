@@ -1,6 +1,5 @@
 import _ from "lodash";
 import { useEffect, useMemo, useState } from "react";
-import GameResultScreen from "../screens/GameResultScreen";
 import FetchData from "../services/FetchData";
 import {
   filteredCharacters,
