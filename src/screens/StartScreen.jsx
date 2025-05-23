@@ -3,8 +3,10 @@ import { useState } from "react";
 import backgroundVideo from "../assets/videos/bakcground_video.mp4";
 import ControlPanel from "../components/ControlPanel";
 import Header from "../components/Header";
+import FetchData from "../services/FetchData";
 import { buttonBase, buttonVariants } from "../utils/common/buttons";
 import Game from "./Game";
+import MatchLogScreen from "./MatchLogScreen";
 import ModalAskName from "./ModalAskName";
 
 function DifficultyChoicesButton({ setSelectedMode, setScreenStatus }) {
@@ -62,7 +64,11 @@ function StartButtonChoices({ setScreenStatus }) {
       >
         Start Game
       </button>
-      <button className={primary_btn_outline} type="button">
+      <button
+        className={primary_btn_outline}
+        type="button"
+        onClick={() => setScreenStatus("match_log")}
+      >
         Match Log
       </button>
     </div>
@@ -74,6 +80,7 @@ export default function StartScreen() {
   const [screenStatus, setScreenStatus] = useState("start");
   const [playerName, setPlayerName] = useState("");
   const [nameInput, setNameInput] = useState("");
+  const { fetchAllPlayersData, isLoading } = FetchData();
 
   function handleNameSubmit(e) {
     e.preventDefault();
@@ -100,6 +107,11 @@ export default function StartScreen() {
           </>
         ) : screenStatus === "game_started" ? (
           <Game mode={selectedMode} playerName={playerName} />
+        ) : screenStatus === "match_log" ? (
+          <MatchLogScreen
+            playersData={fetchAllPlayersData}
+            isLoading={isLoading}
+          />
         ) : playerName === "" ? (
           <form
             onSubmit={handleNameSubmit}
