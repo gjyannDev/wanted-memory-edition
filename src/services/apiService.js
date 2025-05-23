@@ -1,4 +1,4 @@
-import { arrayUnion, updateDoc } from "firebase/firestore";
+import { arrayUnion, getDoc, updateDoc } from "firebase/firestore";
 import { user_ref } from "./firebaseClient";
 
 export async function getAnimeCharacterDetails() {
@@ -21,6 +21,17 @@ export async function addPlayerData(playerData) {
     );
 
     return res;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function getPlayerData() {
+  try {
+    const res = await getDoc(user_ref);
+    const data = res.data();
+
+    return data.playerData;
   } catch (error) {
     console.error(error);
   }
