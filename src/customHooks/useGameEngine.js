@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import FetchData from "../services/FetchData";
 import {
   filteredCharacters,
+  getBestScore,
   selected_characters,
   shuffleCharacterData,
 } from "../utils/utility";
@@ -20,6 +21,7 @@ export function useGameEngine(mode) {
     () => filteredCharacters(fetchCharacterDetails, selected_characters),
     [fetchCharacterDetails]
   );
+  const { fetchAllPlayersData, isLoading } = FetchData();
 
   useEffect(() => {
     if (mode === "Easy") {
@@ -34,12 +36,21 @@ export function useGameEngine(mode) {
     }
   }, [character_data, mode]);
 
+  useEffect(() => {
+    if (!isLoading && fetchAllPlayersData && mode) {
+      setBestScore(getBestScore(fetchAllPlayersData, mode, isLoading));
+    }
+  }, [fetchAllPlayersData, isLoading, mode]);
+
+  console.log("bestScore: ", bestScore);
+
   function restartGame() {
     setScore(0);
-    setCardClicks([])
+    setCardClicks([]);
     setCardClickCount(0);
-    setGameStatus("playing")
+    setGameStatus("playing");
     setFilteredData(shuffleCharacterData(character_data, mode));
+    setBestScore(getBestScore(fetchAllPlayersData, mode, isLoading));
   }
 
   return {
@@ -57,6 +68,6 @@ export function useGameEngine(mode) {
     setCardClicks,
     gameStatus,
     setGameStatus,
-    restartGame
+    restartGame,
   };
 }

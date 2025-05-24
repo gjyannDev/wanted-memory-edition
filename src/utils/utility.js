@@ -23,6 +23,14 @@ export function shuffleCharacterData(character_data, mode) {
   return result;
 }
 
+export function getBestScore(data, mode, isLoading) {
+  if (isLoading) return;
+  
+  return data
+    .filter((el) => el.mode === mode)
+    .reduce((acc, curr) => Math.max(acc, curr.score), -Infinity);
+}
+
 export const selected_characters = [
   "Monkey D., Luffy",
   "Sanji",

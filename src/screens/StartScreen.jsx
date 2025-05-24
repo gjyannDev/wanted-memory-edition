@@ -106,7 +106,11 @@ export default function StartScreen() {
             <StartButtonChoices setScreenStatus={setScreenStatus} />
           </>
         ) : screenStatus === "game_started" ? (
-          <Game mode={selectedMode} playerName={playerName} />
+          <Game
+            mode={selectedMode}
+            playerName={playerName}
+            allPlayersData={fetchAllPlayersData}
+          />
         ) : screenStatus === "match_log" ? (
           <MatchLogScreen
             playersData={fetchAllPlayersData}

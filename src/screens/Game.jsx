@@ -1,6 +1,5 @@
 import clsx from "clsx";
 import _ from "lodash";
-// import { useEffect, useMemo, useState } from "react";
 import onePieceLogo from "../assets/images/one_piece_logo.png";
 import WantedCard from "../components/WantedCard";
 import { useGameEngine } from "../customHooks/useGameEngine";
@@ -27,11 +26,10 @@ function GameHeader({ currentScore, bestScore }) {
   );
 }
 
-export default function Game({ mode, playerName}) {
+export default function Game({ mode, playerName }) {
   const {
     score,
     setScore,
-    setBestScore,
     bestScore,
     filteredData,
     gameRounds,
